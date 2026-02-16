@@ -15,7 +15,7 @@ resume_cl_creator/
 ├── Workflow.txt                       # Detailed workflow documentation
 │
 ├── Reference_Latex_template/          # LaTeX template files for styling
-│   └── Latex_resume_template/    # Example resume template
+│   └── Latex_resume_template/         # Example resume template
 │       ├── main.tex                   # Main document
 │       ├── work-experience.tex        # Experience section
 │       ├── highlighted-projects.tex   # Projects section

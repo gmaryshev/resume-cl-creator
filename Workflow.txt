@@ -16,28 +16,33 @@ STEP 3: READ JOB DESCRIPTION
 
 STEP 4: CREATE OUTPUT FOLDER
 - Create a new folder in Output/ with naming convention:
-  resume_cl_(Job_Title_at_Company)_(version_number)
-  Example: resume_cl_Software_Engineer_at_Plexxis_1
+  (Job_Title_at_Company)_resume_cl_(llm_model)_(version_number)
+  Example: Software_Engineer_at_Plexxis_resume_cl_Sonnet4.5_1
 - Increment version_number (1, 2, 3...) for each new generation
 
 STEP 5: GENERATE DOCUMENTS
 - Create tailored resume and cover letter based on job description
 - Use LaTeX format matching the template style
 - Resume should try to be ATS friendly
-- Do not blatantly lie e.g. do not say that my project used technologies that I didnt actually use
+- Do not blatantly lie e.g. do not say that my project used technologies that 
+  I didn't actually use
+- Double check the documents to make sure that the text is all 
+  correct and sounds natural e.g. don't randomly name a section "Access Projects" 
+  instead of "Projects", "Access Projects" sounds unnatural
 - Compile to PDF format
 
 STEP 6: ORGANIZE OUTPUT FILES
-- Place compiled PDFs (resume_1.pdf and cover_letter_1.pdf) in the main folder
-- Create subfolder: resume_cl_(Job_Title_at_Company)_latex_(version_number)
+- Place compiled PDFs ((full_name)_resume_(Job_Title_at_Company)_(version_number)_(llm_model_initials).pdf and (full_name)_cover_letter_(Job_Title_at_Company)_(version_number)_(llm_model_initials).pdf) in the main folder
+  - LLM model initials: H for Haiku, S for Sonnet, Gr for Grok, etc.
+- Create subfolder: (Job_Title_at_Company)_resume_cl_latex_(version_number)
 - Store all LaTeX source files (.tex, .aux, etc.) in the latex subfolder
 
 FINAL STRUCTURE EXAMPLE:
 Output/
-  └── resume_cl_Software_Engineer_at_Plexxis_1/
-      ├── resume_1.pdf
-      ├── cover_letter_1.pdf
-      └── resume_cl_Software_Engineer_at_Plexxis_latex_1/
+  └── Software_Engineer_at_Plexxis_resume_cl_Sonnet4.5_1/
+      ├── John_Doe_resume_Software_Engineer_at_Plexxis_1_S.pdf
+      ├── John_Doe_cover_letter_Software_Engineer_at_Plexxis_1_S.pdf
+      └── Software_Engineer_at_Plexxis_resume_cl_latex_1/
           ├── main.tex
           ├── resume.tex
           └── cover_letter.tex
