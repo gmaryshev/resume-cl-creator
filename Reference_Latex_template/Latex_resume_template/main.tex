@@ -1,0 +1,97 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[left=0.40in, right=0.40in, top=0.3in, bottom=0.3in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{csquotes}
+\usepackage{dirtytalk}
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+
+\setlength{\parindent}{1em}
+
+\newcommand{\resumeSection}[1]{\section*{\Large\textbf{#1}}}
+
+\newcommand{\projectEntry}[5]{\noindent \textbf{#1} \\
+\textit{Technologies used: #2} \hfill \textit{#3} \par
+\vspace{3pt}
+#4
+#5 % Optional spacing parameter.
+}
+
+\newcommand{\experienceEntry}[5]{\textbf{#1} \\
+\textit{#2} \hfill \textit{#3} \par
+\vspace{3pt}
+#4
+#5 % Optional spacing parameter.
+}
+
+\newcommand{\educationEntry}[3]{%
+    \textbf{#1} \\
+    \textit{#2} \hfill \textit{#3}
+}
+
+\begin{document}
+
+% remove page numbering---use if resume is one page
+\pagenumbering{gobble}
+
+
+% HEADER
+\begin{center}
+    {\LARGE\textbf{John Smith}} \\
+    \vspace{4pt}
+    \text{+1 (555) 123-4567 | \href{mailto:john.smith@example.com}{john.smith@example.com}} |
+    \text{\href{https://github.com/johnsmith}{github.com/johnsmith}}
+    \vspace{9pt}
+\end{center}
+
+
+% EDUCATION
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5mm, sharp corners]
+\resumeSection{Education}
+    \educationEntry
+        {BSc in Computer Science}
+        {State University, Springfield, State}
+        {\textit{Sep 2020 - May 2024 (expected year of graduation)}}
+\end{tcolorbox}
+    
+
+% SKILLS
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5mm, sharp corners]
+\resumeSection{Relevant Skills}
+\input{skills-summarized}
+\end{tcolorbox}
+
+
+% Current work..?
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5mm, sharp corners]
+\resumeSection{Current Studies}
+\input{current-work}
+\end{tcolorbox}
+
+
+% PROJECTS
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5mm, sharp corners]
+\resumeSection{Highlighted Project}
+\input{highlighted-projects}
+\end{tcolorbox}
+
+
+% EXPERIENCE
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5mm, sharp corners]
+\resumeSection{Work Experience}
+\input{work-experience}
+\end{tcolorbox}
+
+
+% SERVICE
+\begin{tcolorbox}[colframe=black, colback=white, boxrule=0.5mm, sharp corners]
+  \resumeSection{Service}
+  \input{service}
+\end{tcolorbox}
+
+
+\end{document}

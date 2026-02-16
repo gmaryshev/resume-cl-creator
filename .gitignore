@@ -1,0 +1,26 @@
+# LaTeX Build Artifacts
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lot
+*.lof
+*.bbl
+*.blg
+*.dvi
+*.xdv
+
+# OS generated files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Personal Info and Generated Content to exclude from repo
+Reference_info/
+Reference_resumes/
+Output/
+Job_descriptions/
+

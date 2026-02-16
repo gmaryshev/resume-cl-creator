@@ -1,0 +1,43 @@
+RESUME & COVER LETTER GENERATION WORKFLOW
+
+STEP 1: ANALYZE LATEX TEMPLATE STRUCTURE
+- Review the LaTeX resume templates in Reference_Latex_template/ for styling inspiration
+- Focus on document structure, formatting, and layout commands
+- CRITICAL: DO NOT copy any personal information from templates (names, emails, phone numbers, etc.)
+
+STEP 2: GATHER PERSONAL CONTENT
+- Read files in Reference_resumes/ for my actual resume content
+- Read files in Reference_info/ for additional personal information (if available)
+- This is the source of truth for my experience, skills, education, and contact details
+
+STEP 3: READ JOB DESCRIPTION
+- Locate and read the job description file in Job_descriptions/
+- Extract key requirements, skills, and qualifications to tailor the application
+
+STEP 4: CREATE OUTPUT FOLDER
+- Create a new folder in Output/ with naming convention:
+  resume_cl_(Job_Title_at_Company)_(version_number)
+  Example: resume_cl_Software_Engineer_at_Plexxis_1
+- Increment version_number (1, 2, 3...) for each new generation
+
+STEP 5: GENERATE DOCUMENTS
+- Create tailored resume and cover letter based on job description
+- Use LaTeX format matching the template style
+- Resume should try to be ATS friendly
+- Do not blatantly lie e.g. do not say that my project used technologies that I didnt actually use
+- Compile to PDF format
+
+STEP 6: ORGANIZE OUTPUT FILES
+- Place compiled PDFs (resume_1.pdf and cover_letter_1.pdf) in the main folder
+- Create subfolder: resume_cl_(Job_Title_at_Company)_latex_(version_number)
+- Store all LaTeX source files (.tex, .aux, etc.) in the latex subfolder
+
+FINAL STRUCTURE EXAMPLE:
+Output/
+  └── resume_cl_Software_Engineer_at_Plexxis_1/
+      ├── resume_1.pdf
+      ├── cover_letter_1.pdf
+      └── resume_cl_Software_Engineer_at_Plexxis_latex_1/
+          ├── main.tex
+          ├── resume.tex
+          └── cover_letter.tex
