@@ -31,9 +31,16 @@ STEP 5: GENERATE DOCUMENTS
   instead of "Projects", "Access Projects" sounds unnatural
 - Compile to PDF format
 
+STEP 5A: CREATE INTERVIEW TIPS FILE
+- Create a tips_Job_Title_at_Company.md file in the same folder as the resume and cover letter pdfs
+- Content should include:
+    - Your opinion of the job and how well your skills match it
+    - Tips to prepare for the job interview
+
 STEP 6: ORGANIZE OUTPUT FILES
 - Place compiled PDFs ((full_name)_resume_(Job_Title_at_Company)_(version_number)_(llm_model_initials).pdf and (full_name)_cover_letter_(Job_Title_at_Company)_(version_number)_(llm_model_initials).pdf) in the main folder
   - LLM model initials: H for Haiku, S for Sonnet, Gr for Grok, etc.
+- Place the tips_Job_Title_at_Company.md file in the main folder alongside the PDFs
 - Create subfolder: (Job_Title_at_Company)_resume_cl_latex_(version_number)
 - Store all LaTeX source files (.tex, .aux, etc.) in the latex subfolder
 
@@ -42,6 +49,7 @@ Output/
   └── Software_Engineer_at_Plexxis_resume_cl_Sonnet4.5_1/
       ├── John_Doe_resume_Software_Engineer_at_Plexxis_1_S.pdf
       ├── John_Doe_cover_letter_Software_Engineer_at_Plexxis_1_S.pdf
+      ├── tips_Software_Engineer_at_Plexxis.md
       └── Software_Engineer_at_Plexxis_resume_cl_latex_1/
           ├── main.tex
           ├── resume.tex

@@ -36,6 +36,7 @@ resume_cl_creator/
     └── resume_cl_[Job_Title]_[Version]/
         ├── resume.pdf
         ├── cover_letter.pdf
+        ├── tips_[Job_Title].md                    # Interview prep and job assessment
         └── resume_cl_[Job_Title]_latex_[Version]/
             ├── main.tex
             ├── resume.tex
@@ -128,6 +129,14 @@ Structure your resume.tex file with sections matching the template:
 - Work Experience
 - Service/Leadership
 
+#### Step 5A: Create Interview Tips File
+Create a **tips_Job_Title_at_Company.md** file containing:
+- Your assessment of the job and how well your skills match the position
+- Tips and strategies to prepare for the interview
+- Key points to research about the company
+
+Example: `tips_Software_Engineer_at_Plexxis.md`
+
 #### Step 6: Compile to PDF
 In your output folder:
 ```bash
@@ -143,6 +152,7 @@ Final structure should be:
 Output/resume_cl_Full_Stack_Developer_at_Acme_Corp_1/
 ├── resume.pdf
 ├── cover_letter.pdf
+├── tips_Full_Stack_Developer_at_Acme_Corp.md
 └── resume_cl_Full_Stack_Developer_at_Acme_Corp_latex_1/
     ├── main.tex
     ├── resume.tex
