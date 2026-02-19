@@ -1,0 +1,6 @@
+- Resume should try to be ATS friendly
+- Do not blatantly lie e.g. do not say that my project used technologies that 
+  I didn't actually use
+- Double check the documents to make sure that the text is all 
+  correct and sounds natural e.g. don't randomly name a section "Access Projects" 
+  instead of "Projects", "Access Projects" sounds unnatural

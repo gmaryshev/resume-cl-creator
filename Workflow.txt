@@ -23,12 +23,7 @@ STEP 4: CREATE OUTPUT FOLDER
 STEP 5: GENERATE DOCUMENTS
 - Create tailored resume and cover letter based on job description
 - Use LaTeX format matching the template style
-- Resume should try to be ATS friendly
-- Do not blatantly lie e.g. do not say that my project used technologies that 
-  I didn't actually use
-- Double check the documents to make sure that the text is all 
-  correct and sounds natural e.g. don't randomly name a section "Access Projects" 
-  instead of "Projects", "Access Projects" sounds unnatural
+- Read and adhere to Resume_rules.txt
 - Compile to PDF format
 
 STEP 5A: CREATE INTERVIEW TIPS FILE

@@ -13,6 +13,7 @@ resume_cl_creator/
 ├── README.md                          # This file
 ├── .gitignore                         # Git ignore rules (excludes personal info)
 ├── Workflow.txt                       # Detailed workflow documentation
+├── Resume_rules.txt                   # General Rules for resumes (personalized rules can be added to the Reference_resumes foler)
 │
 ├── Reference_Latex_template/          # LaTeX template files for styling
 │   └── Latex_resume_template/         # Example resume template
