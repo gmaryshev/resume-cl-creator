@@ -25,3 +25,5 @@ Output/
 Job_descriptions/
 Job_tracking/
 
+# Per-run context bundles and manifests
+.workflow/

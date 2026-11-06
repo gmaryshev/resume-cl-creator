@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "description": "Approved source files for resume and cover-letter context bundles.",
+  "groups": [
+    {
+      "name": "workflow-instructions",
+      "trust": "instruction",
+      "include": [
+        "wf.txt",
+        "writing_rules.txt",
+        "Reference_resumes/additional_custom_resume_rules"
+      ]
+    },
+    {
+      "name": "personal-facts",
+      "trust": "primary-fact",
+      "include": [
+        "Reference_info/*.md",
+        "Reference_info/Linkedin_profile_info"
+      ],
+      "exclude": [
+        "Reference_info/examples_of_my_bash_scripts/**"
+      ]
+    },
+    {
+      "name": "reference-resumes",
+      "trust": "curated-example",
+      "include": [
+        "Reference_resumes/**/*.md"
+      ]
+    },
+    {
+      "name": "latex-template",
+      "trust": "formatting-only",
+      "include": [
+        "Reference_Latex_template/**/*.tex"
+      ]
+    }
+  ]
+}

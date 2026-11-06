@@ -1,21 +1,51 @@
 RESUME & COVER LETTER GENERATION WORKFLOW
 
-STEP 1: ANALYZE LATEX TEMPLATE STRUCTURE
-- Review the LaTeX resume templates in Reference_Latex_template/ for styling inspiration
-- Focus on document structure, formatting, and layout commands
-- CRITICAL: DO NOT copy any personal information from templates (names, emails, phone numbers, etc.)
+ENTRY CONDITION
+- The user places or updates the job description at `Job_descriptions/jobdesc`
+  and starts this workflow by saying `go wf.txt`.
+- Treat `Job_descriptions/jobdesc` as the job description for this run unless
+  the user explicitly names another path.
 
-STEP 2: GATHER PERSONAL CONTENT
-- Read files in Reference_resumes/ for my actual resume content
-- Read files in Reference_info/ for additional personal information (if available)
-- Pay special attention to Work_journal_reflections.md and whimsy_web_app.md
-- This is the source of truth for my experience, skills, education, and contact details
+STEP 0: BUILD THE CONTEXT BUNDLE
+- Run this command from the repository root before reading reference material:
+  `python3 workflow/bundle_context.py Job_descriptions/jobdesc`
+- If the command fails, stop and report the error; do not generate documents or
+  write application-tracking rows.
+- Record the printed bundle directory path for this run.
+- Read the generated `context.md` as the primary context package and
+  `manifest.json` for source provenance, trust levels, and hashes.
+- Use only sources included by `workflow/source_registry.json` as approved
+  generation context. Do not silently add files from reference folders.
+- The bundle contains the complete job description. Do not reread
+  `Job_descriptions/jobdesc` separately unless verifying a source detail.
+- For each item in `manifest.json` under `summarization.requests`, use the
+  Copilot model to create a concise, source-traceable summary before drafting.
+  Summaries must contain only facts supported by the named source. Preserve the
+  original source path and section/location references. Never invent dates,
+  metrics, technologies, responsibilities, or credentials.
+- Keep the generated bundle directory under `.workflow/bundles/`; it is
+  temporary run context and must not be copied into `Output/`.
 
-STEP 3: READ JOB DESCRIPTION
-- Locate and read the job description file in Job_descriptions/
-- Extract key requirements, skills, and qualifications to tailor the application
+STEP 1: ANALYZE THE JOB AND GATHER APPROVED CONTENT
+- Use the job-description section of `context.md` to extract requirements,
+  skills, responsibilities, location, employment type, company, job title, and
+  URL if present.
+- Use the personal-facts and reference-resumes sections of `context.md` for
+  actual experience, skills, education, projects, and contact details.
+- Treat `primary-fact` sources as factual evidence and
+  `curated-example` sources as style/content references, not additional facts.
+- Resolve conflicts according to source trust and the explicit rules in the
+  bundled workflow-instructions sources. If a material conflict remains,
+  surface it rather than guessing.
 
-STEP 3A: SAVE JOB DESCRIPTION
+STEP 2: ANALYZE LATEX TEMPLATE STRUCTURE
+- Use the latex-template section of `context.md` for styling inspiration and
+  structural commands.
+- Focus on document structure, formatting, and layout commands.
+- CRITICAL: DO NOT copy any personal information from templates (names, emails,
+  phone numbers, etc.). Use personal facts from approved sources instead.
+
+STEP 3: SAVE JOB DESCRIPTION
 - Save the complete job description as a PDF file in the run's Output/ folder
 - Use the naming convention: (Job_Title_at_Company).pdf
 - Preserve the job description text accurately; include the source URL and retrieval date when available
@@ -30,7 +60,9 @@ STEP 4: CREATE OUTPUT FOLDER
 STEP 5: GENERATE DOCUMENTS
 - Create tailored resume and cover letter based on job description
 - Use LaTeX format matching the template style
-- Read and adhere to writing_rules.txt
+- Follow the writing rules and personal rules included in the context bundle.
+- If a rule must be checked against its source, use the provenance path in
+  `manifest.json`; do not broaden the source set without documenting why.
 - Compile to PDF format
 
 STEP 5A: CREATE INTERVIEW TIPS FILE
@@ -47,6 +79,8 @@ STEP 6: ORGANIZE OUTPUT FILES
 - Store all LaTeX source files (.tex, .aux, etc.) in the latex subfolder
 
 STEP 7: LOG JOB APPLICATION
+- Only perform this step after all required PDFs compile successfully and the
+  output structure is verified.
 - Every completed run of this workflow is an application by default; do not wait for separate confirmation and do not ask for extra tracking information.
 - At the end of every run, add one row to Job_tracking/applications.csv using a unique application_id.
 - Record only facts produced by this workflow: application date, company, job title, job-description path, job URL if present, location/employment type if present, output folder, generated resume/cover-letter/tips files, LaTeX folder, LLM model, version, and status.

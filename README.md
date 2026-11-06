@@ -12,8 +12,13 @@ This project helps you create customized resume and cover letter pairs for job a
 resume_cl_creator/
 ├── README.md                          # This file
 ├── .gitignore                         # Git ignore rules (excludes personal info)
-├── Workflow.txt                       # Detailed workflow documentation
-├── Resume_rules.txt                   # General Rules for resumes (personalized rules can be added to the Reference_resumes folder)
+├── wf.txt                             # Workflow instructions for `go wf.txt`
+├── writing_rules.txt                  # General writing rules
+├── workflow/                          # Context bundling tools and source registry
+│   ├── bundle_context.py
+│   ├── source_registry.json
+│   └── README.md
+├── tests/                             # Bundler tests
 │
 ├── Reference_Latex_template/          # LaTeX template files for styling
 │   └── Latex_resume_template/         # Example resume template
@@ -89,6 +94,49 @@ pdflatex main.tex
 If successful, you'll see a `main.pdf` file generated.
 
 ## Workflow Summary
+
+The normal entry point is `go wf.txt`.
+
+### Quick Start
+
+1. Put the complete job description in `Job_descriptions/jobdesc`.
+2. Tell the Copilot agent: `go wf.txt`.
+3. The workflow runs the context bundler:
+
+   ```bash
+   python3 workflow/bundle_context.py Job_descriptions/jobdesc
+   ```
+
+4. The agent reads the generated `context.md` and `manifest.json` from the
+   printed `.workflow/bundles/` directory.
+5. The agent uses Copilot to summarize long-source requests recorded in the
+   manifest, preserving source paths and factual traceability.
+6. The agent generates and compiles the resume, cover letter, and interview
+   tips, then records the application only after required PDFs compile and the
+   output structure is verified.
+
+If bundling fails, the workflow must stop without generating documents or
+writing application-tracking rows.
+
+### Context Bundling
+
+The checked-in [source registry](workflow/source_registry.json) controls which
+files are approved generation context. Source folders remain separate; the
+bundler compacts their contents into a per-run package:
+
+- `context.md` contains the job description, approved source content, and
+  generation constraints.
+- `manifest.json` records source groups, trust levels, SHA-256 hashes,
+  character counts, and Copilot summarization requests.
+
+Bundles are written to `.workflow/bundles/`, which is ignored by Git. Existing
+bundle directories are never overwritten. Run the bundler manually with:
+
+```bash
+python3 workflow/bundle_context.py Job_descriptions/jobdesc
+```
+
+See [workflow/README.md](workflow/README.md) for bundler options.
 
 ### Quick Start: Creating Your First Resume & Cover Letter
 
@@ -241,9 +289,12 @@ rm -f *.aux *.fdb_latexmk *.fls *.log *.out *.synctex.gz
 
 ## Notes
 
-- This project is designed for manual LaTeX editing and compilation
-- For automation, consider writing Python scripts that generate .tex files programmatically
-- The `.gitignore` file is pre-configured to exclude personal information and build artifacts
+- The generation workflow is agent-driven, with `wf.txt` as the entry point.
+- Context bundling is automated; document generation and LaTeX compilation
+  still depend on the agent following the workflow instructions.
+- Reference information, generated output, job descriptions, and tracking CSVs
+  are excluded from Git by default because they may contain personal data.
+- The `.workflow/` directory contains temporary per-run bundles and is ignored.
 
 ## License
 
