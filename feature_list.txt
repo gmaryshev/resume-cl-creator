@@ -1,0 +1,106 @@
+User: what's your opinion on this whole system, how can it be improved in terms or quality or improved in terms of reducing token cost per output
+
+GitHub Copilot: Search complete: Read key workspace files
+
+Searched for files matching `**/Resume_rules.txt`, 1 match
+
+Searched for files matching `**/Reference_info*`, no matches
+
+Searched for files matching `**/Reference_resumes*`, no matches
+
+Searched for files matching `**/job description*`, no matches
+
+Searched for files matching `**/*.txt`, 2 matches
+
+Searched for files matching `**/*.tex`, 7 matches
+
+Searched for files matching `**/*`, 12 matches
+
+Read [](file:///home/gmaryshev/devel/workspace/resume-cl-creator/Resume_rules.txt)
+
+Read [](file:///home/gmaryshev/devel/workspace/resume-cl-creator/Workflow.txt)
+
+Read [](file:///home/gmaryshev/devel/workspace/resume-cl-creator/README.md#1-1), lines 1 to 200
+
+Read [](file:///home/gmaryshev/devel/workspace/resume-cl-creator/Reference_Latex_template/Latex_resume_template/main.tex)
+
+Read [](file:///home/gmaryshev/devel/workspace/resume-cl-creator/Resume_rules.txt)
+
+Read [](file:///home/gmaryshev/devel/workspace/resume-cl-creator/Reference_info)
+
+Read [](file:///home/gmaryshev/devel/workspace/resume-cl-creator/Reference_resumes)
+
+Read [](file:///home/gmaryshev/devel/workspace/resume-cl-creator/Reference_info/Personal%20Info.md)
+
+Read [](file:///home/gmaryshev/devel/workspace/resume-cl-creator/Reference_resumes/additional_custome_resume_rules)
+
+Read [](file:///home/gmaryshev/devel/workspace/resume-cl-creator/Reference_resumes/resume%20test.docx.md)
+
+Read [](file:///home/gmaryshev/devel/workspace/resume-cl-creator/Reference_resumes/resume%20test.docx.md#59-59), lines 59 to 59
+
+Read [](file:///home/gmaryshev/devel/workspace/resume-cl-creator/Reference_info/Work_journal_reflections.md)
+
+Here's my honest assessment:
+
+---
+
+## What Works Well
+
+- The workflow is clear and repeatable — a good mental checklist.
+- Separating reference content (personal info, resume, LaTeX templates) from output is clean.
+- The LaTeX template approach produces consistently formatted, professional PDFs.
+- The `tips` file is a nice touch for interview prep.
+
+---
+
+## Quality Improvements
+
+**1. Resume_rules.txt is dangerously thin.** Three lines is not enough to guide an LLM. It should include:
+- Preferred bullet point structure (STAR format? impact + metric + action?)
+- What sections are always required vs. optional
+- Word count / line limits per bullet
+- Preferred tone (first person vs. implied first person)
+- ATS formatting specifics (no tables, no headers in text boxes, etc.)
+
+**2. Personal info is fragmented across too many files.** The LLM has to reconcile `Personal Info.md`, `resume test.docx.md`, Work_journal_reflections.md, `Linkedin_profile_info`, and `morse code project.md`. This risks inconsistencies and forces the model to do unnecessary merging work. A single canonical `master_profile.md` would be more reliable.
+
+**3. additional_custome_resume_rules contains rules that contradict or overlap with Resume_rules.txt.** Two separate rules files invite conflicts. Consolidate them.
+
+**4. No example of a "good" output.** There's no gold-standard previous resume to use as a quality reference. Adding one (even an anonymized prior output you approved) would dramatically anchor quality.
+
+**5. The LaTeX template has no comments guiding what to customize.** The LLM has to infer which parts are structural vs. content. Annotated templates with comments like `% INSERT WORK EXPERIENCE HERE` reduce errors.
+
+---
+
+## Token Cost Reductions
+
+**1. The biggest cost is passing the full LaTeX template every run.** Instead, strip templates down to skeleton files with only structure markers and key commands — remove the filler example content. This could cut template token input by 50%+.
+
+**2. Consolidate reference files** (as above). Fewer files = fewer tokens. The Work_journal_reflections.md file is full of narrative that is only marginally useful — extract only the concrete facts/achievements and discard the journal prose.
+
+**3. The Workflow.txt is very verbose for an LLM system prompt.** It uses natural language where numbered structured commands suffice. Short bullet instructions cost far fewer tokens than prose explanations.
+
+**4. Cache-friendly structure matters.** If you use Claude via API, put the static content (personal profile, LaTeX templates, rules) in a system prompt with prompt caching enabled. Only the job description changes per run — that should be the only variable input, keeping cache hit rates high and cost per generation very low.
+
+**5. Tips file generation is a separate inference pass worth doing.** Generating tips and the resume/cover letter in one prompt inflates context. The tips are low-stakes content — a cheaper/smaller model (e.g. Haiku) with just the job description and a short profile summary could generate them at a fraction of the cost.
+
+---
+
+## Summary Priority List
+
+| Change | Impact | Effort |
+|---|---|---|
+| Consolidate reference files into one `master_profile.md` | High quality + cost | Low |
+| Expand Resume_rules.txt significantly | High quality | Low |
+| Trim LaTeX templates to skeletons | Medium cost | Medium |
+| Use prompt caching for static content | High cost reduction | Medium |
+| Use cheaper model for tips file | Medium cost | Low |
+| Add a gold-standard example output | Medium quality | Low |
+
+Fix for the wierd spacing error llm makes when following the template:
+template issue this can be added to the resume_rules.txt:
+% filepath: /home/gmaryshev/devel/workspace/resume-cl-creator/Reference_Latex_template/Latex_resume_template/main.tex
+% ⚠️ DO NOT use \section* — use \resumeSection{} macro instead
+% ⚠️ DO NOT use \par + \vspace together — use \\[Npt] inline
+% ⚠️ \\ is only valid inside tabular/tcolorbox — never in plain paragraph mode
+% INSERT SECTION HERE

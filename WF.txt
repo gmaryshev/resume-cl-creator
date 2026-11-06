@@ -8,11 +8,18 @@ STEP 1: ANALYZE LATEX TEMPLATE STRUCTURE
 STEP 2: GATHER PERSONAL CONTENT
 - Read files in Reference_resumes/ for my actual resume content
 - Read files in Reference_info/ for additional personal information (if available)
+- Pay special attention to Work_journal_reflections.md and whimsy_web_app.md
 - This is the source of truth for my experience, skills, education, and contact details
 
 STEP 3: READ JOB DESCRIPTION
 - Locate and read the job description file in Job_descriptions/
 - Extract key requirements, skills, and qualifications to tailor the application
+
+STEP 3A: SAVE JOB DESCRIPTION
+- Save the complete job description as a PDF file in the run's Output/ folder
+- Use the naming convention: (Job_Title_at_Company).pdf
+- Preserve the job description text accurately; include the source URL and retrieval date when available
+- Reuse an existing matching PDF file in the output folder when the job description has already been saved
 
 STEP 4: CREATE OUTPUT FOLDER
 - Create a new folder in Output/ with naming convention:
@@ -23,7 +30,7 @@ STEP 4: CREATE OUTPUT FOLDER
 STEP 5: GENERATE DOCUMENTS
 - Create tailored resume and cover letter based on job description
 - Use LaTeX format matching the template style
-- Read and adhere to Resume_rules.txt
+- Read and adhere to writing_rules.txt
 - Compile to PDF format
 
 STEP 5A: CREATE INTERVIEW TIPS FILE
@@ -39,12 +46,25 @@ STEP 6: ORGANIZE OUTPUT FILES
 - Create subfolder: (Job_Title_at_Company)_resume_cl_latex_(version_number)
 - Store all LaTeX source files (.tex, .aux, etc.) in the latex subfolder
 
+STEP 7: LOG JOB APPLICATION
+- Every completed run of this workflow is an application by default; do not wait for separate confirmation and do not ask for extra tracking information.
+- At the end of every run, add one row to Job_tracking/applications.csv using a unique application_id.
+- Record only facts produced by this workflow: application date, company, job title, job-description path, job URL if present, location/employment type if present, output folder, generated resume/cover-letter/tips files, LaTeX folder, LLM model, version, and status.
+- Use repository-relative paths and leave unavailable fields blank; never guess missing facts.
+- Set the initial status to "Applied" and status_date to the application date.
+- Add one matching row to Job_tracking/status_history.csv with a unique event_id, from_status "Not Applied", and to_status "Applied".
+- If a later status is explicitly provided, update applications.csv and append its transition to status_history.csv.
+- Use the controlled status values documented in Job_tracking/README.md.
+- Keep notes factual and concise; do not store passwords, account credentials, or other sensitive information.
+- Verify that the application and status-history rows have matching application_id values.
+
 FINAL STRUCTURE EXAMPLE:
 Output/
   └── Software_Engineer_at_Plexxis_resume_cl_Sonnet4.5_1/
       ├── John_Doe_resume_Software_Engineer_at_Plexxis_1_S.pdf
       ├── John_Doe_cover_letter_Software_Engineer_at_Plexxis_1_S.pdf
       ├── tips_Software_Engineer_at_Plexxis.pdf
+      ├── Software_Engineer_at_Plexxis.pdf
       └── Software_Engineer_at_Plexxis_resume_cl_latex_1/
           ├── main.tex
           ├── resume.tex
